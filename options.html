@@ -255,7 +255,7 @@
             <button class="btn" id="reset-open-shortcut">重置</button>
           </div>
           <div class="shortcut-info">
-            <p>默认快捷键：<strong>Windows/Linux: Ctrl+T</strong> | <strong>Mac: Command+T</strong></p>
+            <p>默认快捷键：<strong>Windows/Linux: Ctrl+E</strong> | <strong>Mac: Command+E</strong></p>
           </div>
         </div>
         
@@ -304,7 +304,7 @@
             openShortcutInput.value = result.openShortcut;
           } else {
             // 设置默认快捷键
-            openShortcutInput.value = 'Ctrl+T (Windows/Linux) / Command+T (Mac)';
+            openShortcutInput.value = 'Ctrl+E (Windows/Linux) / Command+E (Mac)';
           }
         });
       }
@@ -353,8 +353,8 @@
       
       // 重置快捷键
       resetOpenShortcutBtn.addEventListener('click', () => {
-        openShortcutInput.value = 'Ctrl+T (Windows/Linux) / Command+T (Mac)';
-        saveShortcut('Ctrl+T (Windows/Linux) / Command+T (Mac)');
+        openShortcutInput.value = 'Ctrl+E (Windows/Linux) / Command+E (Mac)';
+        saveShortcut('Ctrl+E (Windows/Linux) / Command+E (Mac)');
       });
       
       // 初始化

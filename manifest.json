@@ -19,8 +19,8 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+T",
-        "mac": "Command+T"
+        "default": "Ctrl+E",
+        "mac": "Command+E"
       }
     }
   },
