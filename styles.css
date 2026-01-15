@@ -1,0 +1,467 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f0f0f0;
+  width: 420px;
+  height: 380px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border-radius: 30px;
+}
+
+/* 主容器 - 苹果风格圆角边框 */
+.clock-container {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  border-radius: 30px;
+  box-shadow: 
+    10px 10px 20px rgba(0, 0, 0, 0.1),
+    -10px -10px 20px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.5),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景条纹 */
+.clock-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 20px
+  );
+  border-radius: 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 顶部风格选择器 */
+.style-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.style-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #d1d1d1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.style-dot.active {
+  background-color: #4a90e2;
+  transform: scale(1.15);
+  box-shadow: 
+    0 0 8px rgba(74, 144, 226, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 主要内容区域 */
+.main-content {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 左侧时钟表盘 */
+.clock-face {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-dial {
+  width: 170px;
+  height: 170px;
+  background: linear-gradient(145deg, #f8f8f8, #ffffff);
+  border-radius: 50%;
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.1),
+    -6px -6px 12px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #4a90e2;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: 
+    0 0 4px rgba(74, 144, 226, 0.5),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* 时针 */
+.hour-hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 60px;
+  background-color: #333;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%);
+  border-radius: 2px;
+  box-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* 分针 */
+.minute-hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 75px;
+  background-color: #555;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%);
+  border-radius: 1.5px;
+  box-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* 秒针 */
+.second-hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 80px;
+  background-color: #ff6b6b;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%);
+  border-radius: 1px;
+  box-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* 时钟数字 */
+.clock-numbers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.number {
+  position: absolute;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.number:nth-child(1) {
+  top: 15px;
+  left: 50%;
+}
+
+.number:nth-child(2) {
+  top: 50%;
+  right: 15px;
+  transform: translate(50%, -50%);
+}
+
+.number:nth-child(3) {
+  bottom: 15px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.number:nth-child(4) {
+  top: 50%;
+  left: 15px;
+  transform: translate(-50%, -50%);
+}
+
+/* 右侧日期面板 */
+.date-panel {
+  flex: 1;
+  background: linear-gradient(145deg, #f0f0f0, #ffffff);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.05),
+    -4px -4px 8px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.solar-date {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.lunar-date {
+  font-size: 15px;
+  color: #666;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
+}
+
+.current-time {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  font-family: 'Courier New', monospace;
+}
+
+/* 底部天气面板 */
+.weather-panel {
+  background: linear-gradient(145deg, #f0f0f0, #ffffff);
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.05),
+    -4px -4px 8px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.weather-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(145deg, #e3f2fd, #ffffff);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  box-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.05),
+    -2px -2px 4px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.weather-info {
+  flex: 1;
+}
+
+.temperature {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.weather-desc {
+  font-size: 15px;
+  color: #666;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.detail-label {
+  font-size: 12px;
+  color: #888;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* 风格切换样式 */
+/* 现代风格 */
+.style-modern .clock-dial {
+  background: linear-gradient(145deg, #e3f2fd, #ffffff);
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.1),
+    -6px -6px 12px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.style-modern .hour-hand,
+.style-modern .minute-hand {
+  background-color: #4a90e2;
+}
+
+.style-modern .current-time {
+  color: #4a90e2;
+}
+
+/* 极简风格 */
+.style-minimal .clock-dial {
+  background: linear-gradient(145deg, #fafafa, #ffffff);
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.05),
+    -4px -4px 8px rgba(255, 255, 255, 0.9),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.style-minimal .clock-numbers {
+  opacity: 0.7;
+}
+
+.style-minimal .hour-hand,
+.style-minimal .minute-hand {
+  background-color: #666;
+}
+
+.style-minimal .current-time {
+  color: #666;
+}
+
+/* 复古风格 */
+.style-vintage .clock-dial {
+  background: linear-gradient(145deg, #f5f5dc, #ffffff);
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.15),
+    -6px -6px 12px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.style-vintage .hour-hand,
+.style-vintage .minute-hand {
+  background-color: #8b4513;
+}
+
+.style-vintage .number {
+  font-family: 'Times New Roman', serif;
+  color: #8b4513;
+}
+
+.style-vintage .current-time {
+  font-family: 'Times New Roman', serif;
+  color: #8b4513;
+}
+
+/* 响应式设计 */
+@media (max-width: 420px) {
+  body {
+    width: 380px;
+    height: 360px;
+  }
+  
+  .clock-container {
+    padding: 20px;
+    border-radius: 30px;
+  }
+  
+  .clock-container::before {
+    border-radius: 30px;
+  }
+  
+  .clock-dial {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .hour-hand {
+    height: 50px;
+  }
+  
+  .minute-hand {
+    height: 65px;
+  }
+  
+  .second-hand {
+    height: 70px;
+  }
+  
+  .number {
+    font-size: 14px;
+  }
+  
+  .date-panel {
+    padding: 15px;
+  }
+  
+  .solar-date {
+    font-size: 16px;
+  }
+  
+  .lunar-date {
+    font-size: 14px;
+  }
+  
+  .weather-panel {
+    padding: 15px;
+  }
+  
+  .weather-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+  
+  .temperature {
+    font-size: 20px;
+  }
+}

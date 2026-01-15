@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桌面时钟</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="clock-container">
+    <!-- 顶部风格选择器 -->
+    <div class="style-selector">
+      <div class="style-dot active" data-style="classic"></div>
+      <div class="style-dot" data-style="modern"></div>
+      <div class="style-dot" data-style="minimal"></div>
+      <div class="style-dot" data-style="vintage"></div>
+    </div>
+    
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+      <!-- 左侧时钟表盘 -->
+      <div class="clock-face">
+        <div class="clock-dial">
+          <div class="clock-center"></div>
+          <div class="hour-hand"></div>
+          <div class="minute-hand"></div>
+          <div class="second-hand"></div>
+          <div class="clock-numbers">
+            <div class="number">12</div>
+            <div class="number">3</div>
+            <div class="number">6</div>
+            <div class="number">9</div>
+          </div>
+        </div>
+      </div>
+      <!-- 右侧日期面板 -->
+      <div class="date-panel">
+        <div class="solar-date" id="solarDate"></div>
+        <div class="lunar-date" id="lunarDate"></div>
+        <div class="current-time" id="currentTime"></div>
+      </div>
+    </div>
+    
+    <!-- 底部天气面板 -->
+    <div class="weather-panel">
+      <div class="weather-icon" id="weatherIcon"></div>
+      <div class="weather-info">
+        <div class="temperature" id="temperature">--°C</div>
+        <div class="weather-desc" id="weatherDesc">加载中...</div>
+      </div>
+      <div class="weather-details">
+        <div class="detail-item">
+          <span class="detail-label">湿度</span>
+          <span class="detail-value" id="humidity">60%</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">风力</span>
+          <span class="detail-value" id="wind">3级</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

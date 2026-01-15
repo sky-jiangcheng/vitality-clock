@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桌面时钟插件 - 选项</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .container {
+      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 
+        10px 10px 20px rgba(0, 0, 0, 0.1),
+        -10px -10px 20px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.5),
+        inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+    }
+    
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+    }
+    
+    h2 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    
+    .keyboard-shortcut {
+      background: linear-gradient(145deg, #f0f0f0, #ffffff);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 
+        4px 4px 8px rgba(0, 0, 0, 0.05),
+        -4px -4px 8px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+        inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .keyboard-shortcut p {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    
+    .keyboard-shortcut ol {
+      color: #666;
+      margin-left: 20px;
+      line-height: 1.5;
+    }
+    
+    .keyboard-shortcut li {
+      margin-bottom: 8px;
+    }
+    
+    .current-shortcut {
+      background: linear-gradient(145deg, #e3f2fd, #ffffff);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 15px;
+      box-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.05),
+        -2px -2px 4px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+        inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .current-shortcut p {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .current-shortcut .shortcut {
+      font-family: 'Courier New', monospace;
+      background-color: rgba(74, 144, 226, 0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #4a90e2;
+    }
+    
+    .tip {
+      background: linear-gradient(145deg, #fff3e0, #ffffff);
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 20px;
+      box-shadow: 
+        4px 4px 8px rgba(0, 0, 0, 0.05),
+        -4px -4px 8px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+        inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .tip p {
+      color: #ff6f00;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>桌面时钟插件 - 选项</h1>
+    
+    <div class="section">
+      <h2>快捷键设置</h2>
+      <div class="keyboard-shortcut">
+        <p>您可以在 Chrome 浏览器的扩展管理页面中自定义桌面时钟插件的快捷键。</p>
+        <ol>
+          <li>点击 Chrome 菜单（右上角三个点）</li>
+          <li>选择 "更多工具" > "扩展程序"</li>
+          <li>在扩展程序页面右上角，点击 "键盘快捷键"</li>
+          <li>找到 "桌面时钟插件"，点击输入框设置您喜欢的快捷键</li>
+        </ol>
+        
+        <div class="current-shortcut">
+          <p>当前默认快捷键：</p>
+          <div>
+            <span class="shortcut">Windows/Linux: Ctrl+Shift+K</span><br>
+            <span class="shortcut">Mac: Command+Shift+K</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tip">
+        <p><strong>提示：</strong> 为了避免冲突，建议使用包含 Ctrl/Command 和 Shift 的组合键，例如 Ctrl+Shift+[字母] 或 Command+Shift+[字母]。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
