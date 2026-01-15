@@ -128,5 +128,19 @@ function init() {
   setupStyleSelector();
 }
 
+// 添加退出弹窗的快捷键监听（Escape键）
+function setupKeyboardShortcuts() {
+  // 监听Escape键关闭弹窗
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      // Chrome扩展中不能直接关闭弹窗，但可以通过失去焦点或最小化来模拟
+      window.close();
+    }
+  });
+}
+
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  setupKeyboardShortcuts();
+});

@@ -119,6 +119,124 @@
       color: #ff6f00;
       line-height: 1.5;
     }
+    
+    /* 自定义快捷键设置样式 */
+    .shortcut-setting {
+      background: linear-gradient(145deg, #f0f0f0, #ffffff);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 
+        4px 4px 8px rgba(0, 0, 0, 0.05),
+        -4px -4px 8px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+        inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+    }
+    
+    .shortcut-item {
+      margin-bottom: 20px;
+    }
+    
+    .shortcut-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .shortcut-item label {
+      display: block;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .shortcut-display {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .shortcut-input {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      width: 200px;
+      font-size: 14px;
+      color: #333;
+      box-shadow: 
+        inset 2px 2px 4px rgba(0, 0, 0, 0.05),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+    
+    .shortcut-input:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 
+        inset 2px 2px 4px rgba(0, 0, 0, 0.05),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.7),
+        0 0 0 2px rgba(74, 144, 226, 0.2);
+    }
+    
+    .btn {
+      background: linear-gradient(145deg, #4a90e2, #357abd);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 
+        4px 4px 8px rgba(0, 0, 0, 0.1),
+        -4px -4px 8px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      background: linear-gradient(145deg, #357abd, #4a90e2);
+      box-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.1),
+        -2px -2px 4px rgba(255, 255, 255, 0.1);
+    }
+    
+    .btn:active {
+      transform: scale(0.98);
+    }
+    
+    .status-message {
+      background: linear-gradient(145deg, #e8f5e8, #ffffff);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 15px;
+      color: #2e7d32;
+      font-size: 14px;
+      box-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.05),
+        -2px -2px 4px rgba(255, 255, 255, 0.7);
+      display: none;
+    }
+    
+    .status-message.show {
+      display: block;
+    }
+    
+    .shortcut-info {
+      background: linear-gradient(145deg, #e3f2fd, #ffffff);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 15px;
+      box-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.05),
+        -2px -2px 4px rgba(255, 255, 255, 0.7);
+    }
+    
+    .shortcut-info p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -127,22 +245,42 @@
     
     <div class="section">
       <h2>快捷键设置</h2>
+      
+      <div class="shortcut-setting">
+        <div class="shortcut-item">
+          <label for="open-shortcut">打开时钟弹窗快捷键</label>
+          <div class="shortcut-display">
+            <input type="text" id="open-shortcut" class="shortcut-input" placeholder="点击设置快捷键" readonly>
+            <button class="btn" id="set-open-shortcut">设置快捷键</button>
+            <button class="btn" id="reset-open-shortcut">重置</button>
+          </div>
+          <div class="shortcut-info">
+            <p>默认快捷键：<strong>Windows/Linux: Ctrl+T</strong> | <strong>Mac: Command+T</strong></p>
+          </div>
+        </div>
+        
+        <div class="shortcut-item">
+          <label for="close-shortcut">关闭时钟弹窗快捷键</label>
+          <div class="shortcut-display">
+            <input type="text" id="close-shortcut" class="shortcut-input" value="Escape" readonly>
+            <p style="color: #666; font-size: 14px;">(内置功能，无需设置)</p>
+          </div>
+          <div class="shortcut-info">
+            <p>按下 <strong>Escape</strong> 键可快速关闭弹窗</p>
+          </div>
+        </div>
+        
+        <div class="status-message" id="status-message"></div>
+      </div>
+      
       <div class="keyboard-shortcut">
-        <p>您可以在 Chrome 浏览器的扩展管理页面中自定义桌面时钟插件的快捷键。</p>
+        <p>您也可以在 Chrome 浏览器的扩展管理页面中管理所有快捷键：</p>
         <ol>
           <li>点击 Chrome 菜单（右上角三个点）</li>
           <li>选择 "更多工具" > "扩展程序"</li>
           <li>在扩展程序页面右上角，点击 "键盘快捷键"</li>
-          <li>找到 "桌面时钟插件"，点击输入框设置您喜欢的快捷键</li>
+          <li>找到 "桌面时钟插件"，可以查看和修改所有快捷键</li>
         </ol>
-        
-        <div class="current-shortcut">
-          <p>当前默认快捷键：</p>
-          <div>
-            <span class="shortcut">Windows/Linux: Ctrl+Shift+K</span><br>
-            <span class="shortcut">Mac: Command+Shift+K</span>
-          </div>
-        </div>
       </div>
       
       <div class="tip">
@@ -150,5 +288,78 @@
       </div>
     </div>
   </div>
+  
+  <script>
+    // 快捷键设置功能
+    document.addEventListener('DOMContentLoaded', () => {
+      const openShortcutInput = document.getElementById('open-shortcut');
+      const setOpenShortcutBtn = document.getElementById('set-open-shortcut');
+      const resetOpenShortcutBtn = document.getElementById('reset-open-shortcut');
+      const statusMessage = document.getElementById('status-message');
+      
+      // 从存储中加载快捷键设置
+      function loadShortcuts() {
+        chrome.storage.sync.get(['openShortcut'], (result) => {
+          if (result.openShortcut) {
+            openShortcutInput.value = result.openShortcut;
+          } else {
+            // 设置默认快捷键
+            openShortcutInput.value = 'Ctrl+T (Windows/Linux) / Command+T (Mac)';
+          }
+        });
+      }
+      
+      // 保存快捷键设置
+      function saveShortcut(shortcut) {
+        chrome.storage.sync.set({ openShortcut: shortcut }, () => {
+          statusMessage.textContent = '快捷键设置已保存！';
+          statusMessage.classList.add('show');
+          setTimeout(() => {
+            statusMessage.classList.remove('show');
+          }, 2000);
+        });
+      }
+      
+      // 设置快捷键
+      setOpenShortcutBtn.addEventListener('click', () => {
+        openShortcutInput.readOnly = false;
+        openShortcutInput.focus();
+        openShortcutInput.value = '';
+        
+        const handleKeyDown = (e) => {
+          e.preventDefault();
+          
+          let shortcut = '';
+          if (e.ctrlKey) shortcut += 'Ctrl+';
+          if (e.metaKey) shortcut += 'Command+';
+          if (e.shiftKey) shortcut += 'Shift+';
+          if (e.altKey) shortcut += 'Alt+';
+          
+          // 只允许字母、数字、F键等
+          if ((e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) || 
+              e.key.startsWith('F') || 
+              ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space', 'Enter', 'Escape'].includes(e.key)) {
+            shortcut += e.key.toUpperCase();
+            
+            openShortcutInput.value = shortcut;
+            saveShortcut(shortcut);
+            openShortcutInput.readOnly = true;
+            document.removeEventListener('keydown', handleKeyDown);
+          }
+        };
+        
+        document.addEventListener('keydown', handleKeyDown);
+      });
+      
+      // 重置快捷键
+      resetOpenShortcutBtn.addEventListener('click', () => {
+        openShortcutInput.value = 'Ctrl+T (Windows/Linux) / Command+T (Mac)';
+        saveShortcut('Ctrl+T (Windows/Linux) / Command+T (Mac)');
+      });
+      
+      // 初始化
+      loadShortcuts();
+    });
+  </script>
 </body>
 </html>
