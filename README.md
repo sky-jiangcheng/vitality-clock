@@ -1,128 +1,128 @@
-# 桌面时钟插件
+# Vitality Clock
 
-一个模拟桌面电子时钟的 Chrome 插件，包含多种表盘风格、日期显示和天气信息。
+A Chrome extension that simulates a desktop digital clock with multiple dial styles, date display, and weather information.
 
-## 功能特性
+## Features
 
-- 🎨 **多种表盘风格**：经典、现代、极简、复古四种风格可选
-- ⏰ **实时时钟显示**：精确的指针式时钟，带有平滑的指针动画
-- 📅 **双重日期显示**：同时显示公历和农历日期
-- 🌤️ **天气信息**：显示当前天气、温度、湿度和风力（模拟数据）
-- ⌨️ **快捷键支持**：
-  - 默认打开快捷键：`Ctrl+Shift+E`（Windows/Linux）或 `Command+Shift+E`（Mac）
-  - 关闭弹窗快捷键：`Escape`（内置功能）
-  - 支持自定义快捷键设置
-- 📱 **响应式设计**：适配不同尺寸的插件窗口
-- 🍎 **苹果风格UI**：采用现代化的圆角、阴影和渐变设计
+- 🎨 **Multiple Dial Styles**: Classic, Modern, Minimalist, and Vintage styles available
+- ⏰ **Real-time Clock Display**: Accurate analog clock with smooth hand animations
+- 📅 **Dual Date Display**: Shows both Gregorian and Lunar dates simultaneously
+- 🌤️ **Weather Information**: Displays current weather, temperature, humidity, and wind (simulated data)
+- ⌨️ **Keyboard Shortcuts**: 
+  - Default open shortcut: `Ctrl+Shift+O` (Windows/Linux) or `Command+Shift+O` (Mac)
+  - Close popup shortcut: `Escape` (built-in feature)
+  - Supports custom shortcut settings
+- 📱 **Responsive Design**: Adapts to different plugin window sizes
+- 🍎 **Apple-style UI**: Modern design with rounded corners, shadows, and gradients
 
-## 技术栈
+## Tech Stack
 
-- **HTML5**：插件的结构和布局
-- **CSS3**：样式设计，包括多种表盘风格和响应式布局
-- **JavaScript**：时钟逻辑、日期计算和交互功能
-- **Chrome Extension API**：浏览器扩展开发
+- **HTML5**: Plugin structure and layout
+- **CSS3**: Styling including multiple dial styles and responsive design
+- **JavaScript**: Clock logic, date calculation, and interaction features
+- **Chrome Extension API**: Browser extension development
 
-## 安装方法
+## Installation
 
-### 从 Chrome 网上应用店安装
+### Install from Chrome Web Store
 
-（待发布到 Chrome 网上应用店后可直接安装）
+(Available after publishing to Chrome Web Store)
 
-### 本地开发安装
+### Local Development Installation
 
-1. 克隆或下载本项目到本地
-2. 打开 Chrome 浏览器，进入 `chrome://extensions/`
-3. 开启右上角的「开发者模式」
-4. 点击「加载已解压的扩展程序」
-5. 选择项目所在的文件夹
-6. 插件安装成功，会在浏览器右上角显示时钟图标
+1. Clone or download this project to your local machine
+2. Open Chrome browser and navigate to `chrome://extensions/`
+3. Enable "Developer mode" in the upper right corner
+4. Click "Load unpacked"
+5. Select the project folder
+6. The plugin is successfully installed and will display a clock icon in the browser's upper right corner
 
-## 使用说明
+## Usage
 
-### 打开时钟
+### Open the Clock
 
-- 点击浏览器右上角的时钟图标
-- 或使用快捷键 `Ctrl+Shift+K`（Windows）/ `Command+Shift+K`（Mac）
+- Click the clock icon in the browser's upper right corner
+- Or use the shortcut `Ctrl+Shift+O` (Windows) / `Command+Shift+O` (Mac)
 
-### 切换表盘风格
+### Switch Dial Styles
 
-- 点击插件窗口顶部的四个风格点
-- 从左到右依次为：经典、现代、极简、复古
-- 风格切换会实时生效
+- Click the four style dots at the top of the plugin window
+- From left to right: Classic, Modern, Minimalist, Vintage
+- Style changes take effect in real-time
 
-### 查看日期和时间
+### View Date and Time
 
-- 左侧显示指针式时钟
-- 右侧显示公历日期、农历日期和数字时钟
-- 底部显示天气信息
+- Analog clock displayed on the left
+- Gregorian date, Lunar date, and digital clock displayed on the right
+- Weather information displayed at the bottom
 
-## 项目结构
+## Project Structure
 
 ```
-├── icons/              # 插件图标
-│   └── icon.svg       # 主图标
-├── manifest.json      # 插件配置文件
-├── popup.html         # 插件弹出窗口页面
-├── popup.js           # 插件核心逻辑
-├── styles.css         # 插件样式
-├── options.html       # 选项页面（预留）
-└── README.md          # 项目说明文档
+├── icons/              # Plugin icons
+│   └── icon.svg       # Main icon
+├── manifest.json      # Plugin configuration file
+├── popup.html         # Plugin popup window page
+├── popup.js           # Plugin core logic
+├── styles.css         # Plugin styles
+├── options.html       # Options page (reserved)
+└── README.md          # Project documentation
 ```
 
-## 主要功能实现
+## Main Function Implementation
 
-### 时钟逻辑
+### Clock Logic
 
-- 使用 `Date` 对象获取当前时间
-- 通过 CSS 变换实现指针的旋转动画
-- 每秒更新一次时钟显示
+- Uses `Date` object to get current time
+- Implements smooth hand rotation animations using CSS transforms
+- Updates clock display every second
 
-### 日期计算
+### Date Calculation
 
-- 使用 `toLocaleDateString` 格式化公历日期
-- 实现简化的农历转换逻辑
-- 每分钟更新一次日期显示
+- Formats Gregorian date using `toLocaleDateString`
+- Implements simplified Lunar calendar conversion logic
+- Updates date display every minute
 
-### 天气信息
+### Weather Information
 
-- 当前使用模拟数据（随机选择天气）
-- 可扩展为调用真实天气 API
-- 包含天气图标、温度、描述、湿度和风力
+- Currently uses simulated data (randomly selects weather)
+- Can be extended to call real weather APIs
+- Includes weather icon, temperature, description, humidity, and wind
 
-### 风格切换
+### Style Switching
 
-- 通过 CSS 类名切换不同风格
-- 四种风格：经典、现代、极简、复古
-- 点击顶部的风格点进行切换
+- Switches between different styles using CSS class names
+- Four styles: Classic, Modern, Minimalist, Vintage
+- Click the style dots at the top to switch
 
-## 浏览器支持
+## Browser Support
 
-- Chrome 88+（支持 Manifest V3）
-- Edge 88+（基于 Chromium）
-- 其他基于 Chromium 的浏览器
+- Chrome 88+ (supports Manifest V3)
+- Edge 88+ (Chromium-based)
+- Other Chromium-based browsers
 
-## 开发计划
+## Development Plan
 
-- [ ] 添加真实天气 API 支持
-- [ ] 实现选项页面，允许用户自定义设置
-- [ ] 添加更多表盘风格
-- [ ] 支持 24 小时制/12 小时制切换
-- [ ] 添加世界时钟功能
-- [ ] 支持深色模式
+- [ ] Add real weather API support
+- [ ] Implement options page for user customization
+- [ ] Add more dial styles
+- [ ] Support 24-hour/12-hour format switching
+- [ ] Add world clock functionality
+- [ ] Support dark mode
 
-## 许可证
+## License
 
 MIT License
 
-## 贡献
+## Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
-## 作者
+## Author
 
-- 项目地址：[https://github.com/yourusername/chrome-clock-extension](https://github.com/yourusername/chrome-clock-extension)
-- 联系方式：your.email@example.com
+- Project URL: [https://github.com/sky-jiangcheng/vitality-clock](https://github.com/sky-jiangcheng/vitality-clock)
+- Contact: jiangcheng1806@gmail.com
 
 ---
 
-**享受使用桌面时钟插件！** 🎉
+**Enjoy using Vitality Clock!** 🎉

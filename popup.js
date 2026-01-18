@@ -1,24 +1,24 @@
-// 农历转换函数
+// Lunar calendar conversion function
 function getLunarDate(date) {
   const lunarCalendar = {
-    1: '正月', 2: '二月', 3: '三月', 4: '四月', 5: '五月', 6: '六月',
-    7: '七月', 8: '八月', 9: '九月', 10: '十月', 11: '十一月', 12: '十二月'
+    1: '1st Month', 2: '2nd Month', 3: '3rd Month', 4: '4th Month', 5: '5th Month', 6: '6th Month',
+    7: '7th Month', 8: '8th Month', 9: '9th Month', 10: '10th Month', 11: '11th Month', 12: '12th Month'
   };
   
   const lunarDays = {
-    1: '初一', 2: '初二', 3: '初三', 4: '初四', 5: '初五', 6: '初六', 7: '初七', 8: '初八', 9: '初九', 10: '初十',
-    11: '十一', 12: '十二', 13: '十三', 14: '十四', 15: '十五', 16: '十六', 17: '十七', 18: '十八', 19: '十九', 20: '二十',
-    21: '廿一', 22: '廿二', 23: '廿三', 24: '廿四', 25: '廿五', 26: '廿六', 27: '廿七', 28: '廿八', 29: '廿九', 30: '三十'
+    1: 'Day 1', 2: 'Day 2', 3: 'Day 3', 4: 'Day 4', 5: 'Day 5', 6: 'Day 6', 7: 'Day 7', 8: 'Day 8', 9: 'Day 9', 10: 'Day 10',
+    11: 'Day 11', 12: 'Day 12', 13: 'Day 13', 14: 'Day 14', 15: 'Day 15', 16: 'Day 16', 17: 'Day 17', 18: 'Day 18', 19: 'Day 19', 20: 'Day 20',
+    21: 'Day 21', 22: 'Day 22', 23: 'Day 23', 24: 'Day 24', 25: 'Day 25', 26: 'Day 26', 27: 'Day 27', 28: 'Day 28', 29: 'Day 29', 30: 'Day 30'
   };
   
-  // 这里使用简化的农历计算，实际项目中可以使用更精确的农历库
+  // Simplified lunar calendar calculation, can use a more accurate library in actual projects
   const month = date.getMonth() + 1;
   const day = date.getDate();
   
-  return `${lunarCalendar[month]}${lunarDays[day]}`;
+  return `${lunarCalendar[month]} ${lunarDays[day]}`;
 }
 
-// 更新时钟指针
+// Update clock hands
 function updateClock() {
   const now = new Date();
   const hours = now.getHours();
@@ -36,7 +36,7 @@ function updateClock() {
   document.querySelector('.second-hand').style.transform = `translate(-50%, -100%) rotate(${secondAngle}deg)`;
 }
 
-// 更新日期信息
+// Update date information
 function updateDate() {
   const now = new Date();
   const options = { 
@@ -46,14 +46,14 @@ function updateDate() {
     weekday: 'long' 
   };
   
-  const solarDate = now.toLocaleDateString('zh-CN', options);
+  const solarDate = now.toLocaleDateString('en-US', options);
   const lunarDate = getLunarDate(now);
   
   document.getElementById('solarDate').textContent = solarDate;
   document.getElementById('lunarDate').textContent = lunarDate;
 }
 
-// 更新当前时间显示
+// Update current time display
 function updateCurrentTime() {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
@@ -63,20 +63,20 @@ function updateCurrentTime() {
   document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-// 获取天气信息（使用模拟数据，实际项目中可以调用天气 API）
+// Get weather information (using simulated data, can call real weather API in actual project)
 function getWeather() {
-  // 模拟天气数据
+  // Simulated weather data
   const weatherData = [
-    { icon: '☀️', temp: '25', desc: '晴天', humidity: '60', wind: '3级' },
-    { icon: '🌤️', temp: '22', desc: '多云', humidity: '55', wind: '2级' },
-    { icon: '🌧️', temp: '18', desc: '小雨', humidity: '85', wind: '4级' },
-    { icon: '❄️', temp: '-2', desc: '雪', humidity: '75', wind: '5级' }
+    { icon: '☀️', temp: '25', desc: 'Sunny', humidity: '60', wind: 'Level 3' },
+    { icon: '🌤️', temp: '22', desc: 'Partly Cloudy', humidity: '55', wind: 'Level 2' },
+    { icon: '🌧️', temp: '18', desc: 'Light Rain', humidity: '85', wind: 'Level 4' },
+    { icon: '❄️', temp: '-2', desc: 'Snow', humidity: '75', wind: 'Level 5' }
   ];
   
-  // 随机选择一个天气
+  // Randomly select a weather
   const randomWeather = weatherData[Math.floor(Math.random() * weatherData.length)];
   
-  // 更新天气信息
+  // Update weather information
   document.getElementById('weatherIcon').textContent = randomWeather.icon;
   document.getElementById('temperature').textContent = `${randomWeather.temp}°C`;
   document.getElementById('weatherDesc').textContent = randomWeather.desc;
@@ -84,21 +84,21 @@ function getWeather() {
   document.getElementById('wind').textContent = randomWeather.wind;
 }
 
-// 风格切换功能
+// Style switching functionality
 function setupStyleSelector() {
   const styleDots = document.querySelectorAll('.style-dot');
   const clockContainer = document.querySelector('.clock-container');
   
   styleDots.forEach(dot => {
     dot.addEventListener('click', () => {
-      // 移除所有活动状态
+      // Remove all active states
       styleDots.forEach(d => d.classList.remove('active'));
-      // 添加当前活动状态
+      // Add current active state
       dot.classList.add('active');
       
-      // 移除所有风格类
+      // Remove all style classes
       clockContainer.className = 'clock-container';
-      // 添加当前风格类
+      // Add current style class
       const style = dot.dataset.style;
       if (style) {
         clockContainer.classList.add(`style-${style}`);
@@ -107,39 +107,39 @@ function setupStyleSelector() {
   });
 }
 
-// 初始化函数
+// Initialization function
 function init() {
-  // 初始化时钟
+  // Initialize clock
   updateClock();
   setInterval(updateClock, 1000);
   
-  // 初始化日期
+  // Initialize date
   updateDate();
-  setInterval(updateDate, 60000); // 每分钟更新一次
+  setInterval(updateDate, 60000); // Update every minute
   
-  // 初始化当前时间显示
+  // Initialize current time display
   updateCurrentTime();
-  setInterval(updateCurrentTime, 1000); // 每秒更新一次
+  setInterval(updateCurrentTime, 1000); // Update every second
   
-  // 初始化天气
+  // Initialize weather
   getWeather();
   
-  // 初始化风格选择器
+  // Initialize style selector
   setupStyleSelector();
 }
 
-// 添加退出弹窗的快捷键监听（Escape键）
+// Add keyboard shortcut listener for closing popup (Escape key)
 function setupKeyboardShortcuts() {
-  // 监听Escape键关闭弹窗
+  // Listen for Escape key to close popup
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      // Chrome扩展中不能直接关闭弹窗，但可以通过失去焦点或最小化来模拟
+      // Cannot directly close popup in Chrome extension, but can simulate by losing focus or minimizing
       window.close();
     }
   });
 }
 
-// 页面加载完成后初始化
+// Initialize after page loads
 document.addEventListener('DOMContentLoaded', () => {
   init();
   setupKeyboardShortcuts();

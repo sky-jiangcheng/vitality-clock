@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>桌面时钟插件 - 选项</title>
+  <title>Vitality Clock - Options</title>
   <style>
     * {
       margin: 0;
@@ -241,32 +241,32 @@
 </head>
 <body>
   <div class="container">
-    <h1>桌面时钟插件 - 选项</h1>
+    <h1>Vitality Clock - Options</h1>
     
     <div class="section">
-      <h2>快捷键设置</h2>
+      <h2>Keyboard Shortcuts</h2>
       
       <div class="shortcut-setting">
         <div class="shortcut-item">
-          <label for="open-shortcut">打开时钟弹窗快捷键</label>
+          <label for="open-shortcut">Open Clock Popup Shortcut</label>
           <div class="shortcut-display">
-            <input type="text" id="open-shortcut" class="shortcut-input" placeholder="点击设置快捷键" readonly>
-            <button class="btn" id="set-open-shortcut">设置快捷键</button>
-            <button class="btn" id="reset-open-shortcut">重置</button>
+            <input type="text" id="open-shortcut" class="shortcut-input" placeholder="Click to set shortcut" readonly>
+            <button class="btn" id="set-open-shortcut">Set Shortcut</button>
+            <button class="btn" id="reset-open-shortcut">Reset</button>
           </div>
           <div class="shortcut-info">
-            <p>默认快捷键：<strong>Windows/Linux: Ctrl+Shift+E</strong> | <strong>Mac: Command+Shift+E</strong></p>
+            <p>Default Shortcut: <strong>Windows/Linux: Ctrl+Shift+E</strong> | <strong>Mac: Command+Shift+E</strong></p>
           </div>
         </div>
         
         <div class="shortcut-item">
-          <label for="close-shortcut">关闭时钟弹窗快捷键</label>
+          <label for="close-shortcut">Close Clock Popup Shortcut</label>
           <div class="shortcut-display">
             <input type="text" id="close-shortcut" class="shortcut-input" value="Escape" readonly>
-            <p style="color: #666; font-size: 14px;">(内置功能，无需设置)</p>
+            <p style="color: #666; font-size: 14px;">(Built-in feature, no need to set)</p>
           </div>
           <div class="shortcut-info">
-            <p>按下 <strong>Escape</strong> 键可快速关闭弹窗</p>
+            <p>Press <strong>Escape</strong> key to quickly close the popup</p>
           </div>
         </div>
         
@@ -274,45 +274,45 @@
       </div>
       
       <div class="keyboard-shortcut">
-        <p>您也可以在 Chrome 浏览器的扩展管理页面中管理所有快捷键：</p>
+        <p>You can also manage all shortcuts in Chrome's extension management page:</p>
         <ol>
-          <li>点击 Chrome 菜单（右上角三个点）</li>
-          <li>选择 "更多工具" > "扩展程序"</li>
-          <li>在扩展程序页面右上角，点击 "键盘快捷键"</li>
-          <li>找到 "桌面时钟插件"，可以查看和修改所有快捷键</li>
+          <li>Click Chrome menu (three dots in the upper right corner)</li>
+          <li>Select "More tools" > "Extensions"</li>
+          <li>In the upper right corner of the extensions page, click "Keyboard shortcuts"</li>
+          <li>Find "Vitality Clock", you can view and modify all shortcuts</li>
         </ol>
       </div>
       
       <div class="tip">
-        <p><strong>提示：</strong> 为了避免冲突，建议使用包含 Ctrl/Command 和 Shift 的组合键，例如 Ctrl+Shift+[字母] 或 Command+Shift+[字母]。</p>
+        <p><strong>Tip:</strong> To avoid conflicts, it is recommended to use combinations including Ctrl/Command and Shift, such as Ctrl+Shift+[letter] or Command+Shift+[letter].</p>
       </div>
     </div>
   </div>
   
   <script>
-    // 快捷键设置功能
+    // Keyboard shortcut setting functionality
     document.addEventListener('DOMContentLoaded', () => {
       const openShortcutInput = document.getElementById('open-shortcut');
       const setOpenShortcutBtn = document.getElementById('set-open-shortcut');
       const resetOpenShortcutBtn = document.getElementById('reset-open-shortcut');
       const statusMessage = document.getElementById('status-message');
       
-      // 从存储中加载快捷键设置
+      // Load shortcut settings from storage
       function loadShortcuts() {
         chrome.storage.sync.get(['openShortcut'], (result) => {
           if (result.openShortcut) {
             openShortcutInput.value = result.openShortcut;
           } else {
-            // 设置默认快捷键
+            // Set default shortcut
             openShortcutInput.value = 'Ctrl+Shift+E (Windows/Linux) / Command+Shift+E (Mac)';
           }
         });
       }
       
-      // 保存快捷键设置
+      // Save shortcut settings
       function saveShortcut(shortcut) {
         chrome.storage.sync.set({ openShortcut: shortcut }, () => {
-          statusMessage.textContent = '快捷键设置已保存！';
+          statusMessage.textContent = 'Shortcut settings saved!';
           statusMessage.classList.add('show');
           setTimeout(() => {
             statusMessage.classList.remove('show');
@@ -320,7 +320,7 @@
         });
       }
       
-      // 设置快捷键
+      // Set shortcut
       setOpenShortcutBtn.addEventListener('click', () => {
         openShortcutInput.readOnly = false;
         openShortcutInput.focus();
@@ -335,7 +335,7 @@
           if (e.shiftKey) shortcut += 'Shift+';
           if (e.altKey) shortcut += 'Alt+';
           
-          // 只允许字母、数字、F键等
+          // Only allow letters, numbers, F keys, etc.
           if ((e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) || 
               e.key.startsWith('F') || 
               ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space', 'Enter', 'Escape'].includes(e.key)) {
@@ -351,13 +351,13 @@
         document.addEventListener('keydown', handleKeyDown);
       });
       
-      // 重置快捷键
+      // Reset shortcut
       resetOpenShortcutBtn.addEventListener('click', () => {
         openShortcutInput.value = 'Ctrl+Shift+E (Windows/Linux) / Command+Shift+E (Mac)';
         saveShortcut('Ctrl+Shift+E (Windows/Linux) / Command+Shift+E (Mac)');
       });
       
-      // 初始化
+      // Initialize
       loadShortcuts();
     });
   </script>
