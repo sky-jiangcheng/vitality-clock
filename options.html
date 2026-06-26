@@ -255,7 +255,7 @@
             <button class="btn" id="reset-open-shortcut">Reset</button>
           </div>
           <div class="shortcut-info">
-            <p>Default Shortcut: <strong>Windows/Linux: Ctrl+Shift+E</strong> | <strong>Mac: Command+Shift+E</strong></p>
+            <p>Default Shortcut: <strong>Windows/Linux: Ctrl+Shift+O</strong> | <strong>Mac: Command+Shift+O</strong></p>
           </div>
         </div>
         
@@ -289,77 +289,6 @@
     </div>
   </div>
   
-  <script>
-    // Keyboard shortcut setting functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      const openShortcutInput = document.getElementById('open-shortcut');
-      const setOpenShortcutBtn = document.getElementById('set-open-shortcut');
-      const resetOpenShortcutBtn = document.getElementById('reset-open-shortcut');
-      const statusMessage = document.getElementById('status-message');
-      
-      // Load shortcut settings from storage
-      function loadShortcuts() {
-        chrome.storage.sync.get(['openShortcut'], (result) => {
-          if (result.openShortcut) {
-            openShortcutInput.value = result.openShortcut;
-          } else {
-            // Set default shortcut
-            openShortcutInput.value = 'Ctrl+Shift+E (Windows/Linux) / Command+Shift+E (Mac)';
-          }
-        });
-      }
-      
-      // Save shortcut settings
-      function saveShortcut(shortcut) {
-        chrome.storage.sync.set({ openShortcut: shortcut }, () => {
-          statusMessage.textContent = 'Shortcut settings saved!';
-          statusMessage.classList.add('show');
-          setTimeout(() => {
-            statusMessage.classList.remove('show');
-          }, 2000);
-        });
-      }
-      
-      // Set shortcut
-      setOpenShortcutBtn.addEventListener('click', () => {
-        openShortcutInput.readOnly = false;
-        openShortcutInput.focus();
-        openShortcutInput.value = '';
-        
-        const handleKeyDown = (e) => {
-          e.preventDefault();
-          
-          let shortcut = '';
-          if (e.ctrlKey) shortcut += 'Ctrl+';
-          if (e.metaKey) shortcut += 'Command+';
-          if (e.shiftKey) shortcut += 'Shift+';
-          if (e.altKey) shortcut += 'Alt+';
-          
-          // Only allow letters, numbers, F keys, etc.
-          if ((e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) || 
-              e.key.startsWith('F') || 
-              ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space', 'Enter', 'Escape'].includes(e.key)) {
-            shortcut += e.key.toUpperCase();
-            
-            openShortcutInput.value = shortcut;
-            saveShortcut(shortcut);
-            openShortcutInput.readOnly = true;
-            document.removeEventListener('keydown', handleKeyDown);
-          }
-        };
-        
-        document.addEventListener('keydown', handleKeyDown);
-      });
-      
-      // Reset shortcut
-      resetOpenShortcutBtn.addEventListener('click', () => {
-        openShortcutInput.value = 'Ctrl+Shift+E (Windows/Linux) / Command+Shift+E (Mac)';
-        saveShortcut('Ctrl+Shift+E (Windows/Linux) / Command+Shift+E (Mac)');
-      });
-      
-      // Initialize
-      loadShortcuts();
-    });
-  </script>
+  <script src="options.js"></script>
 </body>
 </html>
