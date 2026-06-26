@@ -8,54 +8,87 @@
 </head>
 <body>
   <div class="clock-container">
-    <!-- 顶部风格选择器 -->
-    <div class="style-selector">
-      <div class="style-dot active" data-style="classic"></div>
-      <div class="style-dot" data-style="modern"></div>
-      <div class="style-dot" data-style="minimal"></div>
-      <div class="style-dot" data-style="vintage"></div>
+    <!-- Header bar -->
+    <div class="header-bar">
+      <div class="style-selector">
+        <div class="style-dot active" data-style="classic"></div>
+        <div class="style-dot" data-style="modern"></div>
+        <div class="style-dot" data-style="minimal"></div>
+        <div class="style-dot" data-style="vintage"></div>
+      </div>
+      <div class="tab-switch">
+        <button class="tab-btn active" data-tab="clock">Clock</button>
+        <button class="tab-btn" data-tab="weather">Weather</button>
+      </div>
     </div>
-    
-    <!-- 主要内容区域 -->
-    <div class="main-content">
-      <!-- 左侧时钟表盘 -->
-      <div class="clock-face">
-        <div class="clock-dial">
-          <div class="clock-center"></div>
-          <div class="hour-hand"></div>
-          <div class="minute-hand"></div>
-          <div class="second-hand"></div>
-          <div class="clock-numbers">
-            <div class="number">12</div>
-            <div class="number">3</div>
-            <div class="number">6</div>
-            <div class="number">9</div>
+
+    <!-- Clock tab -->
+    <div class="tab-view active" id="tab-clock">
+      <div class="main-content">
+        <div class="clock-face">
+          <div class="clock-dial">
+            <div class="clock-center"></div>
+            <div class="hour-hand"></div>
+            <div class="minute-hand"></div>
+            <div class="second-hand"></div>
+            <div class="clock-numbers">
+              <div class="number">12</div>
+              <div class="number">3</div>
+              <div class="number">6</div>
+              <div class="number">9</div>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- 右侧日期面板 -->
-      <div class="date-panel">
-        <div class="solar-date" id="solarDate"></div>
-        <div class="lunar-date" id="lunarDate"></div>
-        <div class="current-time" id="currentTime"></div>
+        <div class="date-panel">
+          <div class="solar-date" id="solarDate"></div>
+          <div class="lunar-date" id="lunarDate"></div>
+          <div class="current-time" id="currentTime"></div>
+        </div>
       </div>
     </div>
-    
-    <!-- 底部天气面板 -->
-    <div class="weather-panel">
-      <div class="weather-icon" id="weatherIcon"></div>
-      <div class="weather-info">
-        <div class="temperature" id="temperature">--°C</div>
-        <div class="weather-desc" id="weatherDesc">Loading...</div>
-      </div>
-      <div class="weather-details">
-        <div class="detail-item">
-          <span class="detail-label">Humidity</span>
-          <span class="detail-value" id="humidity">60%</span>
+
+    <!-- Weather tab -->
+    <div class="tab-view" id="tab-weather">
+      <div class="weather-page">
+        <div class="weather-hero">
+          <div class="weather-icon-large" id="weatherIconLarge"></div>
+          <div class="weather-temp-large" id="weatherTempLarge">--</div>
+          <div class="weather-desc-large" id="weatherDescLarge">--</div>
+          <div class="weather-feels" id="weatherFeels">--</div>
         </div>
-        <div class="detail-item">
-          <span class="detail-label">Wind</span>
-          <span class="detail-value" id="wind">Level 3</span>
+        <div class="weather-details-grid">
+          <div class="detail-card">
+            <span class="dc-label">Humidity</span>
+            <span class="dc-value" id="wdHumidity">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">Wind</span>
+            <span class="dc-value" id="wdWind">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">Pressure</span>
+            <span class="dc-value" id="wdPressure">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">Visibility</span>
+            <span class="dc-value" id="wdVisibility">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">UV Index</span>
+            <span class="dc-value" id="wdUv">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">Sunrise</span>
+            <span class="dc-value" id="wdSunrise">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">Sunset</span>
+            <span class="dc-value" id="wdSunset">--</span>
+          </div>
+          <div class="detail-card">
+            <span class="dc-label">Location</span>
+            <span class="dc-value" id="wdLocation">--</span>
+          </div>
         </div>
       </div>
     </div>

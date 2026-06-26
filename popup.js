@@ -56,20 +56,17 @@ var cnyDates = [
   [2045, 1, 17], [2046, 1, 6],  [2047, 0, 26], [2048, 1, 14], [2049, 1, 2],
 ];
 
-// Lunar month names
 var lunarMonthNames = [
   '', '1st Month', '2nd Month', '3rd Month', '4th Month', '5th Month', '6th Month',
   '7th Month', '8th Month', '9th Month', '10th Month', '11th Month', '12th Month'
 ];
 
-// Lunar day names
 var lunarDayNames = [
   '', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10',
   'Day 11', 'Day 12', 'Day 13', 'Day 14', 'Day 15', 'Day 16', 'Day 17', 'Day 18', 'Day 19', 'Day 20',
   'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'
 ];
 
-// Get days in a given lunar year
 function getLunarYearDays(yearIndex) {
   var info = lunarInfo[yearIndex];
   var sum = 0;
@@ -83,7 +80,6 @@ function getLunarYearDays(yearIndex) {
   return sum;
 }
 
-// Get days in a specific lunar month of a year
 function getLunarMonthDays(yearIndex, month) {
   var info = lunarInfo[yearIndex];
   var leapMonth = info & 0xf;
@@ -93,32 +89,27 @@ function getLunarMonthDays(yearIndex, month) {
   return ((info >> (4 + month - 1)) & 1) ? 30 : 29;
 }
 
-// Get leap month for a lunar year (0 = no leap)
 function getLeapMonth(yearIndex) {
   return lunarInfo[yearIndex] & 0xf;
 }
 
-// Convert Gregorian date to Lunar date
 function getLunarDate(date) {
   var year = date.getFullYear();
   var month = date.getMonth();
   var day = date.getDate();
 
-  // Calculate days since 1900-01-31 (Chinese New Year of 1900/庚子年)
   var baseDate = new Date(1900, 0, 31);
   var offset = Math.floor((date.getTime() - baseDate.getTime()) / 86400000);
 
   var yearIndex = 0;
   var daysInYear = getLunarYearDays(yearIndex);
 
-  // Find the correct lunar year
   while (offset >= daysInYear && yearIndex < lunarInfo.length - 1) {
     offset -= daysInYear;
     yearIndex++;
     daysInYear = getLunarYearDays(yearIndex);
   }
 
-  // Now find the correct lunar month and day within this year
   var leapMonth = getLeapMonth(yearIndex);
   var isLeap = false;
   var lunarMonth = 0;
@@ -201,26 +192,61 @@ function updateCurrentTime() {
 // Deterministic weather based on current time (stable within the hour)
 function getWeather() {
   var now = new Date();
-  var hourSeed = now.getHours() + now.getDate() * 24 + (now.getMonth() + 1) * 24 * 31;
+  var hourSeed = Math.abs(now.getHours() + now.getDate() * 24 + (now.getMonth() + 1) * 24 * 31);
+  var daySeed = Math.abs(now.getDate() + (now.getMonth() + 1) * 31);
 
-  var weatherData = [
-    { icon: '\u2600\uFE0F', temp: '25', desc: 'Sunny', humidity: '60', wind: 'Level 3' },
-    { icon: '\uD83C\uDF24\uFE0F', temp: '22', desc: 'Partly Cloudy', humidity: '55', wind: 'Level 2' },
-    { icon: '\uD83C\uDF27\uFE0F', temp: '18', desc: 'Light Rain', humidity: '85', wind: 'Level 4' },
-    { icon: '\u2744\uFE0F', temp: '-2', desc: 'Snow', humidity: '75', wind: 'Level 5' }
+  var weatherScenarios = [
+    {
+      icon: '\u2600\uFE0F', desc: 'Sunny', temp: 28, feelsLike: 30,
+      humidity: 45, wind: '12 km/h', pressure: '1013 hPa',
+      visibility: '16 km', uv: 'High', sunrise: '05:42', sunset: '19:28', location: 'Beijing'
+    },
+    {
+      icon: '\uD83C\uDF24\uFE0F', desc: 'Partly Cloudy', temp: 22, feelsLike: 23,
+      humidity: 55, wind: '8 km/h', pressure: '1016 hPa',
+      visibility: '14 km', uv: 'Moderate', sunrise: '06:10', sunset: '18:55', location: 'Shanghai'
+    },
+    {
+      icon: '\uD83C\uDF27\uFE0F', desc: 'Light Rain', temp: 17, feelsLike: 16,
+      humidity: 85, wind: '18 km/h', pressure: '1008 hPa',
+      visibility: '6 km', uv: 'Low', sunrise: '06:30', sunset: '17:40', location: 'Chengdu'
+    },
+    {
+      icon: '\u26C5', desc: 'Cloudy', temp: 19, feelsLike: 18,
+      humidity: 65, wind: '15 km/h', pressure: '1011 hPa',
+      visibility: '10 km', uv: 'Low', sunrise: '06:05', sunset: '18:48', location: 'Guangzhou'
+    },
+    {
+      icon: '\u2744\uFE0F', desc: 'Snow', temp: -3, feelsLike: -7,
+      humidity: 78, wind: '22 km/h', pressure: '1020 hPa',
+      visibility: '3 km', uv: 'None', sunrise: '07:15', sunset: '16:55', location: 'Harbin'
+    },
+    {
+      icon: '\uD83C\uDF26\uFE0F', desc: 'Overcast', temp: 15, feelsLike: 14,
+      humidity: 70, wind: '10 km/h', pressure: '1014 hPa',
+      visibility: '9 km', uv: 'Low', sunrise: '06:20', sunset: '18:30', location: 'Nanjing'
+    }
   ];
 
-  var index = Math.abs(hourSeed) % weatherData.length;
-  var weather = weatherData[index];
+  var index = hourSeed % weatherScenarios.length;
+  var w = weatherScenarios[index];
 
-  document.getElementById('weatherIcon').textContent = weather.icon;
-  document.getElementById('temperature').textContent = weather.temp + '\u00B0C';
-  document.getElementById('weatherDesc').textContent = weather.desc;
-  document.getElementById('humidity').textContent = weather.humidity + '%';
-  document.getElementById('wind').textContent = weather.wind;
+  document.getElementById('weatherIconLarge').textContent = w.icon;
+  document.getElementById('weatherTempLarge').textContent = w.temp + '\u00B0';
+  document.getElementById('weatherDescLarge').textContent = w.desc;
+  document.getElementById('weatherFeels').textContent = 'Feels like ' + w.feelsLike + '\u00B0C';
+
+  document.getElementById('wdHumidity').textContent = w.humidity + '%';
+  document.getElementById('wdWind').textContent = w.wind;
+  document.getElementById('wdPressure').textContent = w.pressure;
+  document.getElementById('wdVisibility').textContent = w.visibility;
+  document.getElementById('wdUv').textContent = w.uv;
+  document.getElementById('wdSunrise').textContent = w.sunrise;
+  document.getElementById('wdSunset').textContent = w.sunset;
+  document.getElementById('wdLocation').textContent = w.location;
 }
 
-// Style switching functionality
+// Style switching
 function setupStyleSelector() {
   var styleDots = document.querySelectorAll('.style-dot');
   var clockContainer = document.querySelector('.clock-container');
@@ -239,18 +265,35 @@ function setupStyleSelector() {
   });
 }
 
-// Load saved settings from storage
+// Tab switching
+function setupTabs() {
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  var tabViews = document.querySelectorAll('.tab-view');
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tabName = btn.dataset.tab;
+
+      tabBtns.forEach(function(b) { b.classList.remove('active'); });
+      tabViews.forEach(function(v) { v.classList.remove('active'); });
+
+      btn.classList.add('active');
+      document.getElementById('tab-' + tabName).classList.add('active');
+    });
+  });
+}
+
+// Load saved settings
 function loadSettings() {
   if (typeof chrome !== 'undefined' && chrome.storage) {
     chrome.storage.sync.get(['openShortcut'], function(result) {
       if (result.openShortcut) {
-        // Settings loaded - shortcut can be displayed if needed
+        // Settings loaded
       }
     });
   }
 }
 
-// Keyboard shortcut listener for closing popup (Escape key)
 function setupKeyboardShortcuts() {
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
@@ -259,7 +302,6 @@ function setupKeyboardShortcuts() {
   });
 }
 
-// Initialization function
 function init() {
   updateClock();
   setInterval(updateClock, 1000);
@@ -273,10 +315,10 @@ function init() {
   getWeather();
 
   setupStyleSelector();
+  setupTabs();
   loadSettings();
 }
 
-// Initialize after page loads
 document.addEventListener('DOMContentLoaded', function() {
   init();
   setupKeyboardShortcuts();
