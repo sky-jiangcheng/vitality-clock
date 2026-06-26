@@ -6,7 +6,7 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: #f0f0f0;
+  background: #0b0b10;
   width: 420px;
   height: 420px;
   overflow: hidden;
@@ -18,109 +18,131 @@ body {
 .clock-container {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  background: linear-gradient(160deg, #171722 0%, #0f0f16 40%, #0b0b12 100%);
   border-radius: 30px;
   box-shadow:
-    10px 10px 20px rgba(0, 0, 0, 0.1),
-    -10px -10px 20px rgba(255, 255, 255, 0.7),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.5),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
-  padding: 20px 25px 25px 25px;
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  padding: 22px 26px 26px 26px;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Subtle ambient glow behind container */
 .clock-container::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.1) 10px,
-    rgba(255, 255, 255, 0.05) 10px,
-    rgba(255, 255, 255, 0.05) 20px
-  );
-  border-radius: 30px;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 180px;
+  background: radial-gradient(ellipse, rgba(108, 140, 255, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Header bar */
+.clock-container::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(108, 140, 255, 0.04) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================
+   Header bar
+   ============================ */
 .header-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   position: relative;
   z-index: 1;
 }
 
-/* Style selector */
+/* ---- Style selector: barely-there dots ---- */
 .style-selector {
   display: flex;
-  gap: 10px;
+  gap: 7px;
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+
+.style-selector:hover {
+  opacity: 1;
 }
 
 .style-dot {
-  width: 11px;
-  height: 11px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: #d1d1d1;
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow:
-    inset 2px 2px 4px rgba(0, 0, 0, 0.1),
-    0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.style-dot:hover {
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(1.3);
 }
 
 .style-dot.active {
-  background-color: #4a90e2;
-  transform: scale(1.15);
-  box-shadow:
-    0 0 8px rgba(74, 144, 226, 0.6),
-    inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+  background: #7b93f0;
+  width: 6px;
+  height: 6px;
+  transform: scale(1);
+  box-shadow: 0 0 7px rgba(123, 147, 240, 0.5);
 }
 
-/* Tab switch */
+/* ---- Tab switch: understated pill ---- */
 .tab-switch {
   display: flex;
-  background: rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
-  padding: 3px;
-  box-shadow:
-    inset 1px 1px 2px rgba(0, 0, 0, 0.08),
-    0 1px 1px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  padding: 2px;
+  opacity: 0.5;
+  transition: opacity 0.35s ease;
+}
+
+.tab-switch:hover {
+  opacity: 0.85;
 }
 
 .tab-btn {
   border: none;
   background: transparent;
-  color: #999;
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
   font-weight: 500;
-  padding: 5px 14px;
-  border-radius: 6px;
+  padding: 4px 14px;
+  border-radius: 18px;
   cursor: pointer;
   transition: all 0.25s ease;
   font-family: inherit;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .tab-btn.active {
-  background: linear-gradient(145deg, #ffffff, #f0f0f0);
-  color: #333;
-  box-shadow:
-    1px 1px 3px rgba(0, 0, 0, 0.08),
-    -1px -1px 2px rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Tab views */
+/* ============================
+   Tab views
+   ============================ */
 .tab-view {
   display: none;
   flex: 1;
@@ -132,16 +154,16 @@ body {
   display: flex;
 }
 
-/* Main content (clock tab) */
+/* ============================
+   Clock tab
+   ============================ */
 .main-content {
   flex: 1;
   display: flex;
-  gap: 20px;
-  position: relative;
-  z-index: 1;
+  gap: 18px;
 }
 
-/* Clock face */
+/* ---- Clock face ---- */
 .clock-face {
   flex: 1;
   display: flex;
@@ -152,13 +174,12 @@ body {
 .clock-dial {
   width: 180px;
   height: 180px;
-  background: linear-gradient(145deg, #f8f8f8, #ffffff);
+  background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
   border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
-    6px 6px 12px rgba(0, 0, 0, 0.1),
-    -6px -6px 12px rgba(255, 255, 255, 0.8),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+    0 0 40px rgba(108, 140, 255, 0.04),
+    inset 0 0 30px rgba(255, 255, 255, 0.02);
   position: relative;
   overflow: hidden;
 }
@@ -168,59 +189,49 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  background-color: #4a90e2;
+  width: 7px;
+  height: 7px;
+  background: #7b93f0;
   border-radius: 50%;
   z-index: 10;
-  box-shadow:
-    0 0 4px rgba(74, 144, 226, 0.5),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8px rgba(123, 147, 240, 0.5);
 }
 
 .hour-hand {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 4px;
-  height: 60px;
-  background-color: #333;
+  width: 3px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.75);
   transform-origin: bottom center;
   transform: translate(-50%, -100%);
-  border-radius: 2px;
-  box-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(255, 255, 255, 0.8);
+  border-radius: 1.5px;
 }
 
 .minute-hand {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 3px;
-  height: 75px;
-  background-color: #555;
+  width: 2px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.55);
   transform-origin: bottom center;
   transform: translate(-50%, -100%);
-  border-radius: 1.5px;
-  box-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(255, 255, 255, 0.8);
+  border-radius: 1px;
 }
 
 .second-hand {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 2px;
-  height: 80px;
-  background-color: #ff6b6b;
+  width: 1px;
+  height: 78px;
+  background: #7b93f0;
   transform-origin: bottom center;
   transform: translate(-50%, -100%);
-  border-radius: 1px;
-  box-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(255, 255, 255, 0.8);
+  border-radius: 0.5px;
+  box-shadow: 0 0 4px rgba(123, 147, 240, 0.4);
 }
 
 .clock-numbers {
@@ -231,47 +242,25 @@ body {
 
 .number {
   position: absolute;
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.25);
   transform: translate(-50%, -50%);
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
 }
 
-.number:nth-child(1) {
-  top: 16px;
-  left: 50%;
-}
+.number:nth-child(1) { top: 16px; left: 50%; }
+.number:nth-child(2) { top: 50%; right: 14px; transform: translate(50%, -50%); }
+.number:nth-child(3) { bottom: 14px; left: 50%; transform: translate(-50%, 50%); }
+.number:nth-child(4) { top: 50%; left: 14px; transform: translate(-50%, -50%); }
 
-.number:nth-child(2) {
-  top: 50%;
-  right: 16px;
-  transform: translate(50%, -50%);
-}
-
-.number:nth-child(3) {
-  bottom: 16px;
-  left: 50%;
-  transform: translate(-50%, 50%);
-}
-
-.number:nth-child(4) {
-  top: 50%;
-  left: 16px;
-  transform: translate(-50%, -50%);
-}
-
-/* Date panel */
+/* ---- Date panel ---- */
 .date-panel {
   flex: 1;
-  background: linear-gradient(145deg, #f0f0f0, #ffffff);
+  background: rgba(255, 255, 255, 0.025);
   border-radius: 16px;
   padding: 20px;
-  box-shadow:
-    4px 4px 8px rgba(0, 0, 0, 0.05),
-    -4px -4px 8px rgba(255, 255, 255, 0.7),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -280,79 +269,75 @@ body {
 }
 
 .solar-date {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+  font-size: 17px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 12px;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 .lunar-date {
-  font-size: 15px;
-  color: #666;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
-  margin-bottom: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 14px;
 }
 
 .current-time {
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
-  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'SF Mono', 'Menlo', 'Courier New', monospace;
+  letter-spacing: 1px;
 }
 
-/* Weather page */
+/* ============================
+   Weather tab
+   ============================ */
 .weather-page {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .weather-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 0 8px 0;
+  padding: 14px 0 4px 0;
 }
 
 .weather-icon-large {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(145deg, #e3f2fd, #ffffff);
+  width: 68px;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36px;
-  box-shadow:
-    4px 4px 8px rgba(0, 0, 0, 0.06),
-    -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
-  margin-bottom: 10px;
+  font-size: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 30px rgba(108, 140, 255, 0.04);
+  margin-bottom: 12px;
 }
 
 .weather-temp-large {
-  font-size: 48px;
-  font-weight: 300;
-  color: #333;
+  font-size: 52px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  letter-spacing: -2px;
 }
 
 .weather-desc-large {
-  font-size: 16px;
-  font-weight: 500;
-  color: #666;
-  margin-top: 4px;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 6px;
 }
 
 .weather-feels {
-  font-size: 13px;
-  color: #999;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
   margin-top: 6px;
 }
 
@@ -360,107 +345,115 @@ body {
 .weather-details-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .detail-card {
-  background: linear-gradient(145deg, #f5f5f5, #ffffff);
+  background: rgba(255, 255, 255, 0.025);
   border-radius: 12px;
-  padding: 12px 8px;
-  box-shadow:
-    3px 3px 6px rgba(0, 0, 0, 0.04),
-    -3px -3px 6px rgba(255, 255, 255, 0.7),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.03);
+  padding: 12px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.035);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 4px;
+  gap: 5px;
+  transition: background 0.25s ease;
+}
+
+.detail-card:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .dc-label {
-  font-size: 11px;
-  color: #999;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.6px;
+  font-weight: 500;
 }
 
 .dc-value {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* Style variation: Modern */
+/* ============================
+   Style variations
+   ============================ */
+
+/* Modern */
 .style-modern .clock-dial {
-  background: linear-gradient(145deg, #e3f2fd, #ffffff);
-  box-shadow:
-    6px 6px 12px rgba(0, 0, 0, 0.1),
-    -6px -6px 12px rgba(255, 255, 255, 0.8),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  border-color: rgba(123, 147, 240, 0.12);
+  box-shadow: 0 0 50px rgba(123, 147, 240, 0.07);
 }
 
 .style-modern .hour-hand,
 .style-modern .minute-hand {
-  background-color: #4a90e2;
+  background: rgba(123, 147, 240, 0.7);
+}
+
+.style-modern .second-hand {
+  background: #a0b4ff;
 }
 
 .style-modern .current-time {
-  color: #4a90e2;
+  color: #a0b4ff;
 }
 
-/* Style variation: Minimal */
+/* Minimal */
 .style-minimal .clock-dial {
-  background: linear-gradient(145deg, #fafafa, #ffffff);
-  box-shadow:
-    4px 4px 8px rgba(0, 0, 0, 0.05),
-    -4px -4px 8px rgba(255, 255, 255, 0.9),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 
 .style-minimal .clock-numbers {
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
 .style-minimal .hour-hand,
 .style-minimal .minute-hand {
-  background-color: #666;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.style-minimal .second-hand {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .style-minimal .current-time {
-  color: #666;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-/* Style variation: Vintage */
+/* Vintage */
 .style-vintage .clock-dial {
-  background: linear-gradient(145deg, #f5f5dc, #ffffff);
-  box-shadow:
-    6px 6px 12px rgba(0, 0, 0, 0.15),
-    -6px -6px 12px rgba(255, 255, 255, 0.7),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.9),
-    inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+  background: radial-gradient(circle at 50% 40%, rgba(180,150,110,0.06), rgba(180,150,110,0.01));
+  border-color: rgba(180, 150, 110, 0.1);
 }
 
 .style-vintage .hour-hand,
 .style-vintage .minute-hand {
-  background-color: #8b4513;
+  background: rgba(200, 170, 130, 0.7);
+}
+
+.style-vintage .second-hand {
+  background: #c8aa82;
 }
 
 .style-vintage .number {
-  font-family: 'Times New Roman', serif;
-  color: #8b4513;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: rgba(200, 170, 130, 0.4);
 }
 
 .style-vintage .current-time {
-  font-family: 'Times New Roman', serif;
-  color: #8b4513;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: rgba(200, 170, 130, 0.7);
 }
 
-/* Responsive */
+/* ============================
+   Responsive
+   ============================ */
 @media (max-width: 420px) {
   body {
     width: 380px;
@@ -472,54 +465,21 @@ body {
     border-radius: 30px;
   }
 
-  .clock-container::before {
-    border-radius: 30px;
-  }
-
   .clock-dial {
-    width: 160px;
-    height: 160px;
+    width: 155px;
+    height: 155px;
   }
 
-  .hour-hand {
-    height: 50px;
-  }
+  .hour-hand  { height: 48px; }
+  .minute-hand { height: 64px; }
+  .second-hand { height: 70px; }
 
-  .minute-hand {
-    height: 65px;
-  }
+  .number { font-size: 13px; }
+  .date-panel { padding: 15px; }
+  .solar-date { font-size: 15px; }
+  .lunar-date { font-size: 13px; }
 
-  .second-hand {
-    height: 70px;
-  }
-
-  .number {
-    font-size: 14px;
-  }
-
-  .date-panel {
-    padding: 15px;
-  }
-
-  .solar-date {
-    font-size: 16px;
-  }
-
-  .lunar-date {
-    font-size: 14px;
-  }
-
-  .weather-icon-large {
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-  }
-
-  .weather-temp-large {
-    font-size: 40px;
-  }
-
-  .weather-details-grid {
-    gap: 8px;
-  }
+  .weather-icon-large { width: 56px; height: 56px; font-size: 28px; }
+  .weather-temp-large { font-size: 42px; }
+  .weather-details-grid { gap: 6px; }
 }
