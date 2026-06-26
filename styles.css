@@ -108,10 +108,10 @@ body {
 /* ---- Tab switch: understated pill ---- */
 .tab-switch {
   display: flex;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 20px;
   padding: 2px;
-  opacity: 0.5;
+  opacity: 0.55;
   transition: opacity 0.35s ease;
 }
 
@@ -174,12 +174,13 @@ body {
 .clock-dial {
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  background: radial-gradient(circle at 50% 40%, #252533, #1a1a26);
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
-    0 0 40px rgba(108, 140, 255, 0.04),
-    inset 0 0 30px rgba(255, 255, 255, 0.02);
+    0 0 40px rgba(108, 140, 255, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   position: relative;
   overflow: hidden;
 }
@@ -203,7 +204,7 @@ body {
   left: 50%;
   width: 3px;
   height: 56px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.9);
   transform-origin: bottom center;
   transform: translate(-50%, -100%);
   border-radius: 1.5px;
@@ -215,7 +216,7 @@ body {
   left: 50%;
   width: 2px;
   height: 72px;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.7);
   transform-origin: bottom center;
   transform: translate(-50%, -100%);
   border-radius: 1px;
@@ -244,7 +245,7 @@ body {
   position: absolute;
   font-size: 15px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.45);
   transform: translate(-50%, -50%);
   letter-spacing: 0.5px;
 }
@@ -257,10 +258,10 @@ body {
 /* ---- Date panel ---- */
 .date-panel {
   flex: 1;
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.045);
   border-radius: 16px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -277,7 +278,7 @@ body {
 
 .lunar-date {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.45);
   margin-bottom: 14px;
 }
 
@@ -309,14 +310,14 @@ body {
 .weather-icon-large {
   width: 68px;
   height: 68px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #1e1e2c;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 30px rgba(108, 140, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 30px rgba(108, 140, 255, 0.06);
   margin-bottom: 12px;
 }
 
@@ -331,13 +332,13 @@ body {
 .weather-desc-large {
   font-size: 15px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
   margin-top: 6px;
 }
 
 .weather-feels {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.35);
   margin-top: 6px;
 }
 
@@ -349,10 +350,10 @@ body {
 }
 
 .detail-card {
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.045);
   border-radius: 12px;
   padding: 12px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -362,12 +363,12 @@ body {
 }
 
 .detail-card:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .dc-label {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
   letter-spacing: 0.6px;
   font-weight: 500;
@@ -376,7 +377,7 @@ body {
 .dc-value {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* ============================
@@ -443,7 +444,7 @@ body {
 
 .style-vintage .number {
   font-family: 'Times New Roman', 'Georgia', serif;
-  color: rgba(200, 170, 130, 0.4);
+  color: rgba(200, 170, 130, 0.55);
 }
 
 .style-vintage .current-time {
