@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="clock-container">
-    <!-- Header bar -->
     <div class="header-bar">
       <div class="style-selector">
         <div class="style-dot active" data-style="classic"></div>
@@ -16,17 +15,23 @@
         <div class="style-dot" data-style="minimal"></div>
         <div class="style-dot" data-style="vintage"></div>
       </div>
-      <div class="tab-switch">
-        <button class="tab-btn active" data-tab="clock">Clock</button>
-        <button class="tab-btn" data-tab="weather">Weather</button>
+      <div class="header-right">
+        <button class="mode-toggle" id="modeToggle" title="Toggle dark/light mode">
+          <span class="mode-icon-dark"></span>
+          <span class="mode-icon-light"></span>
+        </button>
+        <div class="tab-switch">
+          <button class="tab-btn active" data-tab="clock">Clock</button>
+          <button class="tab-btn" data-tab="weather">Weather</button>
+        </div>
       </div>
     </div>
 
-    <!-- Clock tab -->
     <div class="tab-view active" id="tab-clock">
       <div class="main-content">
         <div class="clock-face">
           <div class="clock-dial">
+            <div class="dial-texture"></div>
             <div class="clock-center"></div>
             <div class="hour-hand"></div>
             <div class="minute-hand"></div>
@@ -37,6 +42,7 @@
               <div class="number">6</div>
               <div class="number">9</div>
             </div>
+            <div class="dial-brand">VITALITY</div>
           </div>
         </div>
         <div class="date-panel">
@@ -47,7 +53,6 @@
       </div>
     </div>
 
-    <!-- Weather tab -->
     <div class="tab-view" id="tab-weather">
       <div class="weather-page">
         <div class="weather-hero">

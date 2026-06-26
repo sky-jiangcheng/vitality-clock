@@ -21,8 +21,6 @@ var lunarInfo = [
   0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0,
 ];
 
-// Chinese New Year dates: [year, month(0-based), day]
-// Index 0 = year 1900
 var cnyDates = [
   [1900, 0, 31], [1901, 1, 19], [1902, 1, 8],  [1903, 0, 29], [1904, 1, 16],
   [1905, 1, 4],  [1906, 0, 25], [1907, 1, 13], [1908, 1, 2],  [1909, 0, 22],
@@ -146,6 +144,26 @@ function getLunarDate(date) {
   return monthStr + ' ' + dayStr;
 }
 
+// Create hour marker indices around the dial
+function createHourMarkers() {
+  var dial = document.querySelector('.clock-dial');
+  if (!dial) return;
+
+  // Remove existing markers
+  var existing = dial.querySelectorAll('.hour-marker');
+  existing.forEach(function(el) { el.remove(); });
+
+  for (var i = 0; i < 12; i++) {
+    // Skip cardinal positions that have numbers (12, 3, 6, 9)
+    if (i % 3 === 0) continue;
+
+    var marker = document.createElement('div');
+    marker.className = 'hour-marker';
+    marker.style.transform = 'translateX(-50%) rotate(' + (i * 30) + 'deg)';
+    dial.appendChild(marker);
+  }
+}
+
 // Update clock hands
 function updateClock() {
   var now = new Date();
@@ -162,7 +180,6 @@ function updateClock() {
   document.querySelector('.second-hand').style.transform = 'translate(-50%, -100%) rotate(' + secondAngle + 'deg)';
 }
 
-// Update date information
 function updateDate() {
   var now = new Date();
   var options = {
@@ -179,7 +196,6 @@ function updateDate() {
   document.getElementById('lunarDate').textContent = lunarDate;
 }
 
-// Update current time display
 function updateCurrentTime() {
   var now = new Date();
   var hours = String(now.getHours()).padStart(2, '0');
@@ -189,11 +205,9 @@ function updateCurrentTime() {
   document.getElementById('currentTime').textContent = hours + ':' + minutes + ':' + seconds;
 }
 
-// Deterministic weather based on current time (stable within the hour)
 function getWeather() {
   var now = new Date();
   var hourSeed = Math.abs(now.getHours() + now.getDate() * 24 + (now.getMonth() + 1) * 24 * 31);
-  var daySeed = Math.abs(now.getDate() + (now.getMonth() + 1) * 31);
 
   var weatherScenarios = [
     {
@@ -246,7 +260,6 @@ function getWeather() {
   document.getElementById('wdLocation').textContent = w.location;
 }
 
-// Style switching
 function setupStyleSelector() {
   var styleDots = document.querySelectorAll('.style-dot');
   var clockContainer = document.querySelector('.clock-container');
@@ -265,7 +278,6 @@ function setupStyleSelector() {
   });
 }
 
-// Tab switching
 function setupTabs() {
   var tabBtns = document.querySelectorAll('.tab-btn');
   var tabViews = document.querySelectorAll('.tab-view');
@@ -283,15 +295,41 @@ function setupTabs() {
   });
 }
 
-// Load saved settings
-function loadSettings() {
-  if (typeof chrome !== 'undefined' && chrome.storage) {
-    chrome.storage.sync.get(['openShortcut'], function(result) {
-      if (result.openShortcut) {
-        // Settings loaded
-      }
-    });
+// Dark/light mode toggle
+function setupModeToggle() {
+  var toggle = document.getElementById('modeToggle');
+
+  function setMode(light) {
+    if (light) {
+      document.body.classList.add('light');
+    } else {
+      document.body.classList.remove('light');
+    }
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+      chrome.storage.sync.set({ lightMode: light });
+    }
   }
+
+  function loadMode() {
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+      chrome.storage.sync.get(['lightMode'], function(result) {
+        if (result.lightMode) {
+          document.body.classList.add('light');
+        }
+      });
+    }
+  }
+
+  toggle.addEventListener('click', function() {
+    var isLight = document.body.classList.contains('light');
+    setMode(!isLight);
+  });
+
+  loadMode();
+}
+
+function loadSettings() {
+  // Reserved for future settings
 }
 
 function setupKeyboardShortcuts() {
@@ -303,6 +341,8 @@ function setupKeyboardShortcuts() {
 }
 
 function init() {
+  createHourMarkers();
+
   updateClock();
   setInterval(updateClock, 1000);
 
@@ -316,6 +356,7 @@ function init() {
 
   setupStyleSelector();
   setupTabs();
+  setupModeToggle();
   loadSettings();
 }
 
